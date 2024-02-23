@@ -1,43 +1,65 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(App());
+/* flutter는 모든 것이 다 class라고 봐도 된다. 
+그래서 객체 지향에 편해져야한다. 
+
+지금 하고 있는 것 처럼 위젯을 사용할 때마다. 클래스를 인스턴스화 한다. 
+그렇기 때문에 항상 new를 써줄 필요가 없다. 
+
+생성자라는 것을 봐보자. (dart를 안다고 가정하에 진행)
+
+먼저 Player라는 class를 만든다.
+메인 함수 위에 클래스를 만들고 메인 함수 안에는 만든 클래스를 이용하게끔 만든다. 
+이때 Player 클래스를 만들때 이름을 보내주게 만들었다.
+
+먼저 이 클래스에서 name에 대해 기본값을 주지 않을 것이다. 그러면 어떻게 할까?
+this를 사용하면 된다. 
+
+// class Player {
+//   //String name = 'tk';
+
+//   String name;
+//   Player(this.name);
+// }
+
+this.name이 의미하는 것은 main함수에 있는 Player()안에 이름을 써주면 this.name안에 적었던 이름을 넣어준다. 
+ 
+ 이 방식은 Text 에서 볼 수 있는 구조임. 그러니까 밑에서 완성 코드에 보이는 Text('어쩌고')이런 것과 똑같은 구조다. 
+ 
+ 또 다른 방식은 named parameter라는 방식이다. 
+ 이 방식은 아래 최종 코드에서 보여지는 appBar, home, body 같은 것을 말한다. 
+ 이 방식은 아래에서 클래스를 만들어 this를 사용하는 방식과는 다르게 사용한다. 
+ 이 방식을 사용하는 이유는 class의 파라미터가 많을때는 이 방식을 사용한다. 
+ 파라미터의 순서를 잊어버리기 쉬워서 이렇게 한다.
+ 
+ 사용 방법은 이렇게 한다. 
+
+// class Player {
+//   String name;
+
+//   Player({required this.name});
+// }
+
+// void main() {
+//   var tk = Player(name:'안녕하세요');
+//   tk.name; //안녕하세요
+//   runApp(App());
+// }
+
+override되어 있는 클래스에 있는 것을 이렇게 해서 가져다가 쓰는 것임.
+
+*/
+
+class Player {
+  String name;
+  Player({required this.name});
 }
 
-// 그냥 클래스만 했다면 아직 위젯은 아니다.
-// 위젯으로 하고 싶다면 flutter SDK에 있는 3개의 core widget중에 하나를 상속 받아야한다.
-// 여기서 StatelessWidget이라는 것을 상속했는데 이것 상속 받기 위해서는 build라고 불리는 메소드를 구현해야한다.
-// 계약이라고 생각하면 된다.
-
-/*class App extends StatelessWidget {
-
-}*/
-
-// build 메소드
-// override라는 것은 부모 class에 이미 있는 것을 다시 불러와서 사용한다는 것.
-// build 메소드는 return을 만들어 줘야 한다.
-// 또 맨 위에 runApp이라는 함수에 App이 있는데 이 말은 App이라는 위젯이 우리 앱의 root가 된다는 말이다.
-// 또 다시 말하면 이것은 우리 앱의 시작점이 된다는 의미다.
-// return을 주려면 2가지 중 하나를 선택해야 한다.
-// 1. material
-// 2. cupertino
-
-// 이것 들은 스타일 요소인데 보통은 1번을 선택한다.
-// 1은 구글, 2는 애플 느낌인데 커스텀 UI를 만들고 싶을때도 1번을 선택해 변형하는게 더 쉽다.
-
-/*class App extends StatelessWidget {
-
-  @override
-  // context라는 것은 일단 무시한다. 
-  Widget build(BuildContext context) {
-    return MaterialApp();
-  }
-
-// flutter에서 화면에 대한 규칙이 하나 또 있다. 
-// 그것은 화면이 scaffold라고 하는 걸 가져야 한다. 
-// 헬로월드 텍스트를 넣을때 바로 텍스트를 넣지 말고 화면 구조를 먼저 정해주고 거기 안에 넣어야함.
-
-}*/
+void main() {
+  var tk = Player(name: "안녕하세요");
+  tk.name; //안녕하세요
+  runApp(App());
+}
 
 // 최종 코드
 class App extends StatelessWidget {
@@ -45,7 +67,9 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(title: Text('hello flutter')),
+        appBar: AppBar(
+          title: Text('hello flutter'),
+        ),
         body: Center(
           child: Text('hello world!'),
         ),
