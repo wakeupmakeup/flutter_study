@@ -1,63 +1,6 @@
 import 'package:flutter/material.dart';
 
-/* flutter는 모든 것이 다 class라고 봐도 된다. 
-그래서 객체 지향에 편해져야한다. 
-
-지금 하고 있는 것 처럼 위젯을 사용할 때마다. 클래스를 인스턴스화 한다. 
-그렇기 때문에 항상 new를 써줄 필요가 없다. 
-
-생성자라는 것을 봐보자. (dart를 안다고 가정하에 진행)
-
-먼저 Player라는 class를 만든다.
-메인 함수 위에 클래스를 만들고 메인 함수 안에는 만든 클래스를 이용하게끔 만든다. 
-이때 Player 클래스를 만들때 이름을 보내주게 만들었다.
-
-먼저 이 클래스에서 name에 대해 기본값을 주지 않을 것이다. 그러면 어떻게 할까?
-this를 사용하면 된다. 
-
-// class Player {
-//   //String name = 'tk';
-
-//   String name;
-//   Player(this.name);
-// }
-
-this.name이 의미하는 것은 main함수에 있는 Player()안에 이름을 써주면 this.name안에 적었던 이름을 넣어준다. 
- 
- 이 방식은 Text 에서 볼 수 있는 구조임. 그러니까 밑에서 완성 코드에 보이는 Text('어쩌고')이런 것과 똑같은 구조다. 
- 
- 또 다른 방식은 named parameter라는 방식이다. 
- 이 방식은 아래 최종 코드에서 보여지는 appBar, home, body 같은 것을 말한다. 
- 이 방식은 아래에서 클래스를 만들어 this를 사용하는 방식과는 다르게 사용한다. 
- 이 방식을 사용하는 이유는 class의 파라미터가 많을때는 이 방식을 사용한다. 
- 파라미터의 순서를 잊어버리기 쉬워서 이렇게 한다.
- 
- 사용 방법은 이렇게 한다. 
-
-// class Player {
-//   String name;
-
-//   Player({required this.name});
-// }
-
-// void main() {
-//   var tk = Player(name:'안녕하세요');
-//   tk.name; //안녕하세요
-//   runApp(App());
-// }
-
-override되어 있는 클래스에 있는 것을 이렇게 해서 가져다가 쓰는 것임.
-
-*/
-
-class Player {
-  String name;
-  Player({required this.name});
-}
-
 void main() {
-  var tk = Player(name: "안녕하세요");
-  tk.name; //안녕하세요
   runApp(App());
 }
 
@@ -67,11 +10,60 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          title: Text('hello flutter'),
-        ),
-        body: Center(
-          child: Text('hello world!'),
+        // 색상 정보를 쓸때 Colors.색상.색조
+        //커스텀 컬러
+        backgroundColor: Color(0xFF181818),
+
+        // Colum은 하나의 child만 가지지 않음 대신 children이라는 List가 존재함.
+        // 여기서 row는 한 섹션을 말함. 강의를 보면 한 Row에 하나의 텍스트와 또 하나의 텍스트가 있음.
+        // 다른걸 올리기 위해선 Column을 사용해야한다.
+        // 즉, Row하나를 만들고 텍스트가 들어있는 2개의 Colume을 만든다.
+        body: Padding(
+          // padding에서 required하고 있는데 타입을 보면 EdgeInsetsGeometry타입을 요구하고 있다.
+          // 이럴때는 아래와 같이 입력한다.
+
+          // all이라는 것은 상하좌우를 뜻한다.
+          // 상하좌우 하나만 하고 싶을때는 only를 쓴다.
+          // padding: EdgeInsets.all(10),
+
+          // 이것은 가로 세로를 뜻한다.
+          padding: EdgeInsets.symmetric(horizontal: 40),
+          child: Column(
+            children: [
+              SizedBox(
+                height: 80,
+              ),
+              // 보면 알겠지만 Row도 children List가 있어야 한다.
+              // Row나 Colume 모두 children List가 있어야 한다고 생각하자.
+              // 마지막에 콤마를 꼭 기억해라
+              Row(
+                // 수평방향
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Column(
+                    // 수평방향 (오른쪽 정렬))
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Text(
+                        'Hey Selena',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 28,
+                            fontWeight: FontWeight.w800),
+                      ),
+                      Text(
+                        'Welcome back',
+                        style: TextStyle(
+                          color: Colors.white.withOpacity(0.8),
+                          fontSize: 22,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
