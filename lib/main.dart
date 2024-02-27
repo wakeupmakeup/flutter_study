@@ -117,6 +117,8 @@ class App extends StatelessWidget {
                 height: 20,
               ),
               Container(
+                // 어떤 아이템이 overflow되었을때 넘친 부분만 잘라내는 기능을 가짐
+                clipBehavior: Clip.hardEdge,
                 decoration: BoxDecoration(
                   color: const Color(0xFF1F2123),
                   borderRadius: BorderRadius.circular(25),
@@ -124,6 +126,7 @@ class App extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(30),
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -163,6 +166,23 @@ class App extends StatelessWidget {
                             ],
                           ),
                         ],
+                      ),
+                      // Transform에서는 child를 이렇게 바로 할 수 없다.
+                      // scale도 설정해 줘야 한다.
+                      // 이렇게 하면 아이콘의 사이즈가 커지지만 카드의 크기는 커지지 않음
+                      Transform.scale(
+                        scale: 2.2,
+                        child: Transform.translate(
+                          // 첫 번째가 x 좌표, 두 번째가 y좌표
+                          offset: const Offset(-5, 15),
+                          child: const Icon(
+                            Icons.euro_rounded,
+                            color: Colors.white,
+                            // 아이콘 사이즈를 키우면 안에 컨테이너도 커지기 때문에 이를 방지해야함.
+                            // Transformationwidget을 사용하면 된다.
+                            size: 88,
+                          ),
+                        ),
                       ),
                     ],
                   ),
