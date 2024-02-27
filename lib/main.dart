@@ -1,24 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_study/widgets/button.dart';
 
 void main() {
-  runApp(App());
+  runApp(const App());
 }
 
 // 최종 코드
 class App extends StatelessWidget {
+  const App({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: Color(0xFF181818),
+        backgroundColor: const Color(0xFF181818),
         body: Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: 40,
+          padding: const EdgeInsets.symmetric(
+            horizontal: 17,
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 80,
               ),
               Row(
@@ -27,8 +30,8 @@ class App extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Text(
-                        'Hey Selena',
+                      const Text(
+                        'Hey, Selena',
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 28,
@@ -38,14 +41,14 @@ class App extends StatelessWidget {
                         'Welcome back',
                         style: TextStyle(
                           color: Colors.white.withOpacity(0.8),
-                          fontSize: 22,
+                          fontSize: 18,
                         ),
                       ),
                     ],
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 120,
               ),
               Text(
@@ -55,11 +58,10 @@ class App extends StatelessWidget {
                   color: Colors.white.withOpacity(0.8),
                 ),
               ),
-              SizedBox(
-                height: 10,
+              const SizedBox(
+                height: 1,
               ),
-              Text(
-                // 변수가 아님을 알려줄때 이렇게 사용.
+              const Text(
                 '\$5 194 482',
                 style: TextStyle(
                   fontSize: 48,
@@ -67,37 +69,24 @@ class App extends StatelessWidget {
                   color: Colors.white,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 25,
               ),
-              Row(
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  // 컨테이너는 div 같은것이고 하나의 child를 가진다.
-                  Container(
-                    // 단순하게 backgroundcolor로 하는게 아니라 데코레이션이라는 것을 사용해야함.
-                    // 이외에도 border radius 작업 등에도 사용됨
-                    decoration: BoxDecoration(
-                      color: Colors.amber,
-                      borderRadius: BorderRadius.circular(
-                        45,
-                      ),
-                    ),
-                    // 지금 보면 패딩 값을 줄때 child에 주는 것을 알 수 있음.
-                    // child에 줘야 컨테이너 안에 넣을 텍스트에 직접 적용된다.
-
-                    child: Padding(
-                      // padding 값을 넣을때 symmetric을 넣고 가로 세로 값을 입력하면 된다.
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 50,
-                        vertical: 20,
-                      ),
-                      child: Text(
-                        'Transfer',
-                        style: TextStyle(
-                          fontSize: 22,
-                        ),
-                      ),
-                    ),
+                  // 이렇게 하면 정말 간단하게 짤 수 있음.
+                  // 여기서는 값들을 미리 알 수 있기 때문에 const가 붙는 것임.
+                  // 지우면 오류는 나지는 않는다.
+                  Button(
+                    text: 'Transfer',
+                    bgColor: Colors.amber,
+                    textColor: Colors.black,
+                  ),
+                  Button(
+                    text: "Request",
+                    bgColor: Color(0xFF1F2123),
+                    textColor: Colors.white,
                   ),
                 ],
               ),
